@@ -40,7 +40,7 @@ services: #コンテナに対応
         environment:
             PMA_HOST: db
             PMA_USER: test_user
-            PMA_PASSWORD: opinion
+            PMA_PASSWORD: password
         depends_on:
             - db
         networks:
