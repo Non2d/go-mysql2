@@ -1,7 +1,7 @@
 package main
 
 import (
-	"net/http"
+	"app/handler"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -11,19 +11,19 @@ func main() {
 	// Echoインスタンスを作成
 	e := echo.New()
 
-	// httpリクエストの情報をログに表示
+	// ミドルウェアを設定
 	e.Use(middleware.Logger())
-	// パニックを回復し、スタックトレースを表示
 	e.Use(middleware.Recover())
 
+	/* ここから追加 */
 	// ルートを設定（第一引数にエンドポイント、第二引数にハンドラーを指定）
-	e.GET("/", hello)
+	e.GET("/users", handler.GetAllUser)
+	e.POST("/users", handler.PostNewUser)
+	e.GET("/users/:id", handler.GetOneUser)
+	e.PUT("/users/:id", handler.PutUser)
+	e.DELETE("/users/:id", handler.DeleteUser)
+	/* ここまで */
 
 	// サーバーをポート番号8080で起動
 	e.Logger.Fatal(e.Start(":8080"))
-}
-
-// ハンドラーを定義（どういう処理を実行するか）
-func hello(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!")
 }

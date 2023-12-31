@@ -1,0 +1,31 @@
+### 
+# @name getAllUsers
+GET http://localhost:8080/users HTTP/1.1
+
+### 
+# @name getOneUser
+GET http://localhost:8080/users/1 HTTP/1.1
+
+### 
+# @name postNewUser
+POST http://localhost:8080/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "New User",
+  "email": "newuser@example.com"
+}
+
+### 
+# @name putUser
+PUT http://localhost:8080/users/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Updated User",
+  "email": "updateduser@example.com"
+}
+
+### 
+# @name deleteUser
+DELETE http://localhost:8080/users/1 HTTP/1.1
