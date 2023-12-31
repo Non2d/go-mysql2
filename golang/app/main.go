@@ -12,8 +12,8 @@ func main() {
 	e := echo.New()
 
 	// ミドルウェアを設定
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	e.Use(middleware.Logger())  // ログ出力
+	e.Use(middleware.Recover()) // パニック時にリカバリー
 
 	/* ここから追加 */
 	// ルートを設定（第一引数にエンドポイント、第二引数にハンドラーを指定）
