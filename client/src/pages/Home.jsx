@@ -1,13 +1,16 @@
 import React from 'react';
+import ToWeatherHomeButton from '../components/ToWeatherHomeButton';
 import PlaceSearch from '../components/PlaceSearch';
 import EssayTextField from '../components/EssayTextField';
 
 const Home = () => {
   return (
     <div align="center">
-      <h1>天気予報アプリケーション</h1>
-      <PlaceSearch />
+      <h1>ホーム画面</h1>
+      {/* <PlaceSearch /> */}
       {/* <EssayTextField /> */}
+      <ToWeatherHomeButton />
+      
     </div>
   );
 }

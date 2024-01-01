@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 const ToWeatherHomeButton = () => {
   return (
     <div align="center">
-      <Link to="/" style={{ textDecoration: 'none' }}>
+      <Link to="/weather_home" style={{ textDecoration: 'none' }}>
         <Button variant="contained" disableElevation color="error">
-          ホームに戻る
+          天気のホームに戻る
         </Button>
       </Link>
     </div>

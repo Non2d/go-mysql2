@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Box from '@mui/material/Box';
 import axios from "axios";
 import WeatherDetail from "../components/WeatherDetail";
-import ToHomeButton from "../components/ToHomeButton";
+import ToWeatherHomeButton from "../components/ToWeatherHomeButton";
 
 const Weather = () => {
   const params = useParams();
@@ -27,7 +27,7 @@ const Weather = () => {
   return (
     <>
       {weather&&weather.error? 
-        <h1>{weather.error}</h1>: 
+        <h1>{weather.error}</h1>:
         <>
           <h1 align="center">{weather? weather.title: null}</h1>
           <Box sx={{display: {md: 'flex'}, justifyContent: {md: 'space-between'}}}>
@@ -48,7 +48,7 @@ const Weather = () => {
           </Box>
 
           {weather?
-             <ToHomeButton />:null
+             <ToWeatherHomeButton />:null
            }
         </>
       }
