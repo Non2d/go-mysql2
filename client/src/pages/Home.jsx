@@ -7,8 +7,7 @@ const Home = () => {
     <div align="center">
       <h1>天気予報アプリケーション</h1>
       <PlaceSearch />
-      <br />
-      <EssayTextField />
+      {/* <EssayTextField /> */}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Box from '@mui/material/Box';
 import axios from "axios";
 import WeatherDetail from "../components/WeatherDetail";
+import ToHomeButton from "../components/ToHomeButton";
 
 const Weather = () => {
   const params = useParams();
@@ -37,12 +38,18 @@ const Weather = () => {
                   date={forecast.date} 
                   forecasts={forecast.telop} 
                   image={forecast.image.url}
+                  minTemp={forecast.temperature.min.celsius? forecast.temperature.min.celsius: '--'}
+                  maxTemp={forecast.temperature.max.celsius? forecast.temperature.max.celsius: '--'}
                   key={i}
                 />
               )
             }): null
           }
           </Box>
+
+          {weather?
+             <ToHomeButton />:null
+           }
         </>
       }
     </>

@@ -27,6 +27,9 @@ function EssayTextField() {
                     onChange={handleChange}
                 />
             </Grid>
+            <Grid item xs={6}>
+                <pre>{text}</pre>
+            </Grid>
         </Grid>
     );
 }

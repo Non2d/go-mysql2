@@ -47,7 +47,7 @@ const PlaceSearch = () => {
         </Select>
       </FormControl>
 
-      <Box sx={{ mt: 4, textAlign: 'center' }}>
+      <Box sx={{ mt: 4, mb:4, textAlign: 'center' }}>
         <Button variant="contained" disableElevation onClick={onSubmit}>
           検索
         </Button>
