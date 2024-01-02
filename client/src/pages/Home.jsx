@@ -1,7 +1,6 @@
 import React from 'react';
 import ToWeatherHomeButton from '../components/ToWeatherHomeButton';
-import PlaceSearch from '../components/PlaceSearch';
-import EssayTextField from '../components/EssayTextField';
+import ToCardButton from '../components/ToCardButton';
 
 const Home = () => {
   return (
@@ -10,6 +9,7 @@ const Home = () => {
       {/* <PlaceSearch /> */}
       {/* <EssayTextField /> */}
       <ToWeatherHomeButton />
+      <ToCardButton />
       
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 
 function EssayTextField() {
@@ -12,6 +13,12 @@ function EssayTextField() {
         setRows(newLines);
     };
 
+    //改行を消す
+    const removeNewLines = () => {
+        const newText = text.replace(/\n/g, "");
+        setText(newText);
+    };
+
     return (
         <Grid container>
             <Grid item xs={6}>
@@ -19,16 +26,17 @@ function EssayTextField() {
                     label="Debatabase"
                     multiline
                     rows={rows}
-                    rowsMax={10} // Adjust this value as needed
                     placeholder="Segment argumentation"
                     variant="outlined"
                     fullWidth
                     value={text}
                     onChange={handleChange}
+                    style={{ fontSize: 16, textAlign:"justify" }} // Adjust this value as needed
                 />
+                <Button onClick={removeNewLines}>Remove New Lines</Button>
             </Grid>
             <Grid item xs={6}>
-                <pre>{text}</pre>
+                <pre style={{ textAlign: "left", fontSize: 16 }}>{text}</pre>
             </Grid>
         </Grid>
     );

@@ -1,11 +1,24 @@
 version: "3.8"
 services: #コンテナに対応
-    go:
-        container_name: go 
-        build: ./golang #goのDockerfileのあるディレクトリを指定
+    react:
+        container_name: react
+        build:
+            context: ./client #Dockerfileのあるディレクトリを指定
+            dockerfile: Dockerfile.dev #Dockerfileのファイル名を指定
         tty: true
         ports:
-            - "8080:8080"
+            - "3000:3000" #ホスト側のポート:コンテナ側のポート
+        volumes:
+            - ./client/src:/app/src
+
+    go:
+        container_name: go
+        build: 
+            context: ./golang
+            dockerfile: Dockerfile.dev
+        tty: true
+        ports:
+            - "8080:8080" #ホスト側のポート:コンテナ側のポート
         env_file:
             - ./mysql/.env
         depends_on: #コンテナの起動順序を指定．
@@ -17,11 +30,13 @@ services: #コンテナに対応
 
     db:
         container_name: db
-        build: ./mysql
+        build:
+            context: ./mysql
+            dockerfile: Dockerfile.dev
         tty: true
         platform: linux/x86_64
         ports:
-            - 3306:3306
+            - 3306:3306 #ホスト側のポート:コンテナ側のポート
         env_file:
             - ./mysql/.env
         volumes:

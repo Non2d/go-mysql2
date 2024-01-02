@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home, WeatherHome, Weather, NotFound } from './pages/index';
+import { Home, Card, WeatherHome, Weather, NotFound } from './pages/index';
 
 
 const App = () => {
@@ -10,6 +10,7 @@ const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/card" element={<Card />} />
                     <Route path="/weather_home" element={<WeatherHome />} />
                     <Route path="/weather/" element={<Weather />} />
                     <Route path="/weather/:id" element={<Weather />} />
