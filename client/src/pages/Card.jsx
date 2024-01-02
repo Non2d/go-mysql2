@@ -7,7 +7,6 @@ const Card = () => {
     <div align="center">
       <h1>カード画面</h1>
       <EssayTextField />
-      <ToHomeButton />
     </div>
   );
 }

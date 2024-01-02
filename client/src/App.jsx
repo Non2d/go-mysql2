@@ -2,12 +2,13 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home, Card, WeatherHome, Weather, NotFound } from './pages/index';
-
+import Header from "./components/Header";
 
 const App = () => {
     return (
         <div className="App">
             <BrowserRouter>
+                <Header title="Web Learing" />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/card" element={<Card />} />

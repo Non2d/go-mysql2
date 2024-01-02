@@ -7,8 +7,6 @@ const WeatherHome = () => {
     <div align="center">
       <h1>天気予報アプリケーションのホーム</h1>
       <PlaceSearch />
-
-      <ToHomeButton/>
     </div>
   );
 }
