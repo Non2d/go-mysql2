@@ -8,6 +8,9 @@ console.log(
 );
 process.env.NODE_ENV = "production";
 module.exports = merge(common, {
-  output: {}, // 本番環境に応じたPathの指定？
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'main.js',
+  }, // 本番環境に応じたPathの指定？
   mode: "production",
 });

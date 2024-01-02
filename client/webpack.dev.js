@@ -7,7 +7,7 @@ console.log(
 );
 process.env.NODE_ENV = "development";
 module.exports = merge(common, {
-　　　　output: {
+    output: {
     publicPath: '/', // これがないとreact-router-domが変な挙動をするかも
   },
   mode: "development",
