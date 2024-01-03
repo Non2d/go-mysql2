@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home, Card, WeatherHome, Weather, NotFound } from './pages/index';
+import { Home, Card, WeatherHome, Weather, ShoppingHome, NotFound } from './pages/index';
 import Header from "./components/Header";
 
 const App = () => {
@@ -15,6 +15,7 @@ const App = () => {
                     <Route path="/weather_home" element={<WeatherHome />} />
                     <Route path="/weather/" element={<Weather />} />
                     <Route path="/weather/:id" element={<Weather />} />
+                    <Route path="/shopping_home" element={<ShoppingHome />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </BrowserRouter>

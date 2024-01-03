@@ -14,6 +14,7 @@ func main() {
 	// ミドルウェアを設定
 	e.Use(middleware.Logger())  // ログ出力
 	e.Use(middleware.Recover()) // パニック時にリカバリー
+	e.Use(middleware.CORS())    // CORS設定を追加
 
 	/* ここから追加 */
 	// ルートを設定（第一引数にエンドポイント、第二引数にハンドラーを指定）

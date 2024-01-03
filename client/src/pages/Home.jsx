@@ -1,6 +1,7 @@
 import React from 'react';
 import ToWeatherHomeButton from '../components/ToWeatherHomeButton';
 import ToCardButton from '../components/ToCardButton';
+import ToShoppingHomeButton from '../components/ToShoppingHomeButton';
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       {/* <EssayTextField /> */}
       <ToWeatherHomeButton />
       <ToCardButton />
+      <ToShoppingHomeButton />
       
     </div>
   );
