@@ -34,7 +34,7 @@ services: #コンテナに対応
         tty: true
         platform: linux/x86_64
         ports:
-            - 3306:3306 #ホスト側のポート:コンテナ側のポート
+            - 3307:3306 #ホスト側のポート:コンテナ側のポート
         env_file:
             - ./mysql/.env
         volumes:
@@ -47,7 +47,7 @@ services: #コンテナに対応
         platform: linux/x86_64
         container_name: phpmyadmin
         ports:
-            - "8081:80"
+            - "9000:80"
         env_file:
             - ./mysql/.env
         environment:
