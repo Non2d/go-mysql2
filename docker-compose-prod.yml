@@ -7,7 +7,7 @@ services: #コンテナに対応
             dockerfile: Dockerfile.prod #Dockerfileのファイル名を指定
         tty: true
         ports:
-            - "8080:80" #ホスト側のポート:コンテナ側のポート
+            - "7000:80" #ホスト側のポート:コンテナ側のポート
 
     go:
         container_name: go
@@ -52,8 +52,6 @@ services: #コンテナに対応
             - ./mysql/.env
         environment:
             PMA_HOST: db
-            PMA_USER: test_user
-            PMA_PASSWORD: password
         depends_on:
             - db
         networks:
