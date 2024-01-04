@@ -6,7 +6,7 @@ const ToCardButton = () => {
   return (
     <div align="center">
       <Link to="/card" style={{ textDecoration: 'none' }}>
-        <Button variant="contained" disableElevation color="error" style={{ marginTop: 40 }}>
+        <Button variant="outlined" disableElevation color="error" style={{ marginTop: 40 }}>
           カード画面へ
         </Button>
       </Link>

@@ -6,7 +6,7 @@ const ToWeatherHomeButton = () => {
   return (
     <div align="center">
       <Link to="/" style={{ textDecoration: 'none' }}>
-        <Button variant="contained" disableElevation color="error" style={{ marginTop: 40 }}>
+        <Button variant="outlined" disableElevation color="error" style={{ marginTop: 40 }}>
           ホーム画面へ
         </Button>
       </Link>

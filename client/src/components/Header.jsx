@@ -10,6 +10,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 // ここにページ名，url，アイコンを記入
 const pages = [
@@ -18,6 +20,7 @@ const pages = [
 
 const Header = (props) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const [darkMode, setDarkMode] = useState(true);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -25,6 +28,11 @@ const Header = (props) => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleThemeChange = () => {
+    setDarkMode(!darkMode);
+    props.onThemeChange(!darkMode)
   };
 
   return (
@@ -103,6 +111,9 @@ const Header = (props) => {
               </Link>
             ))}
           </Box>
+          <IconButton color="inherit" onClick={handleThemeChange}>
+            {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
         </Toolbar>
       </Container>
     </AppBar>

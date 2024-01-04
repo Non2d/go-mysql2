@@ -5,13 +5,12 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { Grid } from '@mui/material';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 const ShoppingHome = () => {
-  // GENERAL
-  const [pageSize, setPageSize] = useState(20); //ページネーションの選択肢を管理
-
   // GET
   const [products, setProducts] = useState([]);
+  const [pageSize, setPageSize] = useState(20); //ページネーションの選択肢を管理
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -44,6 +43,7 @@ const ShoppingHome = () => {
   // POST
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const postData = async (name, age) => {
     const result = await axios.post(
@@ -57,13 +57,54 @@ const ShoppingHome = () => {
     fetchData();
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (name, age) => {
+    if (!name || !age) {
+      setErrorMessage('Name and Age cannot be empty');
+      return;
+    } else {
+      setErrorMessage('');
+    }
     postData(name, age);
   };
 
   // DELETE
   const [selectedRows, setSelectedRows] = useState([]);
+  const handleDelete = async () => {
+    try {
+      const promises = selectedRows.map((id) =>
+        axios.delete(`http://localhost:8080/users/${id}`)
+      );
+      await Promise.all(promises);
+      const newProducts = products.filter((product) => !selectedRows.includes(product.id));
+      setProducts(newProducts);
+    } catch (error) {
+      console.error('削除できませんでした:', error);
+    }
+  };
+
+  //UPDATE
+  const handleEdit = async (name, age) => {
+    try {
+      const promises = selectedRows.map(async (id) => {
+        const product = products.find((product) => product.id === id);
+        const updatedProduct = {
+          ...product,
+          name: name,
+          age: age,
+          // updatedAt: new Date().toLocaleString(),
+        };
+        await axios.put(`http://localhost:8080/users/${id}`, {
+          name: name,
+          age: age,
+        });
+      });
+      await Promise.all(promises);
+      fetchData();
+    } catch (error) {
+      console.error('更新できませんでした:', error);
+    }
+  };
+
 
   return (
     <div style={{ height: 800, width: '80%', margin: '0 auto' }}>
@@ -78,9 +119,10 @@ const ShoppingHome = () => {
           setSelectedRows(newSelection);
         }}
       />
+      <span style={{ color: 'red' }}>{errorMessage}</span>
       <Box
         component="form"
-        onSubmit={handleSubmit}
+        id="form"
         sx={{
           '& .MuiTextField-root': { m: 1, width: '25ch' },
           padding: 2,
@@ -90,55 +132,40 @@ const ShoppingHome = () => {
         autoComplete="off"
       >
         <Grid container spacing={2} alignItems="center">
-          <Grid item xs={12} sm={4}>
+          <Grid>
             <TextField
               id="outlined-name"
               name="name"
               label="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              fullWidth
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid>
             <TextField
               id="outlined-age"
               name="age"
+              type="number"
               label="Age"
               value={age}
               onChange={(e) => {
                 const value = e.target.value.trim();
-                setAge(value === '' ? '' : isNaN(parseInt(value)) ? value : parseInt(value));
+                setAge(value === '' ? value : parseInt(value));
               }}
-              fullWidth
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <Button variant="contained" type="submit" fullWidth>
-              Post
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={async () => {
-                try {
-                  const promises = selectedRows.map((id) =>
-                    axios.delete(`http://localhost:8080/users/${id}`)
-                  );
-                  await Promise.all(promises);
-                  const newProducts = products.filter((product) => !selectedRows.includes(product.id));
-                  setProducts(newProducts);
-                } catch (error) {
-                  console.log(selectedRows);
-                  console.error('削除できませんでした:', error);
-                }
-              }}
-              fullWidth
-            >
-              Delete Selected
-            </Button>
+          <Grid>
+            <ButtonGroup variant="outlined" aria-label="contained primary button group">
+              <Button onClick={() => handleSubmit(name, age)}>
+                Post
+              </Button>
+              <Button onClick={() => handleEdit(name, age)}>
+                Edit
+              </Button>
+              <Button onClick={handleDelete}>
+                Delete
+              </Button>
+            </ButtonGroup>
           </Grid>
         </Grid>
       </Box>
