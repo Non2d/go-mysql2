@@ -8,6 +8,9 @@ import { Grid } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
 const ShoppingHome = () => {
+  const API_URL = process.env.API_URL;
+  console.log("APIのURLは"+API_URL);
+
   // GET
   const [products, setProducts] = useState([]);
   const [pageSize, setPageSize] = useState(20); //ページネーションの選択肢を管理
@@ -23,7 +26,7 @@ const ShoppingHome = () => {
 
   const fetchData = async () => {
     const result = await axios(
-      'http://localhost:8080/users',
+      `${API_URL}/users`,
     );
 
     const dataWithIds = result.data.map((item) => ({
@@ -47,7 +50,7 @@ const ShoppingHome = () => {
 
   const postData = async (name, age) => {
     const result = await axios.post(
-      'http://localhost:8080/users',
+      `${API_URL}/users`,
       {
         name: name,
         age: age,
@@ -72,7 +75,7 @@ const ShoppingHome = () => {
   const handleDelete = async () => {
     try {
       const promises = selectedRows.map((id) =>
-        axios.delete(`http://localhost:8080/users/${id}`)
+        axios.delete(`${API_URL}/users/${id}`)
       );
       await Promise.all(promises);
       const newProducts = products.filter((product) => !selectedRows.includes(product.id));
@@ -93,7 +96,7 @@ const ShoppingHome = () => {
           age: age,
           // updatedAt: new Date().toLocaleString(),
         };
-        await axios.put(`http://localhost:8080/users/${id}`, {
+        await axios.put(`${API_URL}/users/${id}`, {
           name: name,
           age: age,
         });

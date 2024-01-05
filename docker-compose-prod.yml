@@ -16,7 +16,7 @@ services: #コンテナに対応
             dockerfile: Dockerfile.prod
         tty: true
         ports:
-            - "8080:8080" #ホスト側のポート:コンテナ側のポート
+            - "8000:8080" #ホスト側のポート:コンテナ側のポート
         env_file:
             - ./mysql/.env
         depends_on: #コンテナの起動順序を指定．

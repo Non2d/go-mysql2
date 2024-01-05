@@ -1,6 +1,7 @@
-const path = require('path'); //npm run buildで必要
+const path = require('path');
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
+const webpack = require('webpack');
 
 console.log(
   "///////////////////////////\n" +
@@ -12,6 +13,11 @@ module.exports = merge(common, {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'main.js',
-  }, // 本番環境に応じたPathの指定？
+  },
   mode: "production",
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.API_URL': JSON.stringify(process.env.API_URL)
+    }),
+  ],
 });
