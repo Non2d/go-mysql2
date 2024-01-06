@@ -1,5 +1,18 @@
 version: "3.8"
 services: #コンテナに対応
+    # nginx:
+    #     image: nginx:1.19.2-alpine
+    #     container_name: nginx
+    #     ports:
+    #         - "80:80" #ホスト側のポート:コンテナ側のポート
+    #         - "443:443"
+    #     volumes:
+    #         - /etc/letsencrypt/live/vps4.nkmr.io/fullchain.pem:/etc/nginx/cert.crt
+    #         - /etc/letsencrypt/live/vps4.nkmr.io/privkey.pem:/etc/nginx/cert.key
+    #         - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+    #     networks:
+    #         - golang_test_network
+    
     react:
         container_name: react
         build:
@@ -7,11 +20,15 @@ services: #コンテナに対応
             dockerfile: Dockerfile.prod #Dockerfileのファイル名を指定
         tty: true
         ports:
-            - "7000:80" #ホスト側のポート:コンテナ側のポート
+            - "7000:80" #"3000:3000"
+        # depends_on: #コンテナの起動順序を指定．
+        #     - nginx
+        networks: #コンテナ間の通信ができるようにする．
+            - golang_test_network
 
     go:
         container_name: go
-        build: 
+        build:
             context: ./golang
             dockerfile: Dockerfile.prod
         tty: true
