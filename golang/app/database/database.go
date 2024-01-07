@@ -31,17 +31,29 @@ func init() {
 
 // DBを起動させる
 func dbInit() *gorm.DB {
-	time.Sleep(5 * time.Second)
-	// [ユーザ名]:[パスワード]@tcp([ホスト名]:[ポート番号])/[データベース名]?charset=[文字コード]
-	dsn := fmt.Sprintf(`%s:%s@tcp(db:3306)/%s?charset=utf8mb4&parseTime=True`,
-		os.Getenv("MYSQL_USER"), os.Getenv("MYSQL_PASSWORD"), os.Getenv("MYSQL_DATABASE"))
-	// DBへの接続を行う
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	maxRetries := 5
+	retryInterval := 1 * time.Second
 
-	// エラーが発生した場合、エラー内容を表示
-	if err != nil {
-		fmt.Println(err)
+	var db *gorm.DB
+	var err error
+
+	for i := 0; i < maxRetries; i++ {
+		// [ユーザ名]:[パスワード]@tcp([ホスト名]:[ポート番号])/[データベース名]?charset=[文字コード]
+		dsn := fmt.Sprintf(`%s:%s@tcp(db:3306)/%s?charset=utf8mb4&parseTime=True`,
+			os.Getenv("MYSQL_USER"), os.Getenv("MYSQL_PASSWORD"), os.Getenv("MYSQL_DATABASE"))
+		// DBへの接続を行う
+		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+		// エラーが発生しなかった場合、ループを抜ける
+		if err == nil {
+			break
+		}
+
+		// エラーが発生した場合、エラー内容を表示し、リトライまで待機する
+		fmt.Printf("Failed to connect to DB: %v\n", err)
+		fmt.Printf("Retrying in %v...\n", retryInterval)
+		time.Sleep(retryInterval)
 	}
+
 	// 接続に成功した場合、「db connected!!」と表示する
 	fmt.Println("db connected!!")
 	return db
