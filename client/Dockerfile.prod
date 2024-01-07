@@ -2,7 +2,7 @@ FROM node as build
 WORKDIR /app
 COPY package.json .
 RUN npm install
-ENV API_URL=http://vps4.nkmr.io:8000
+ENV API_URL=https://vps4.nkmr.io/api
 COPY . .
 RUN npm run build
 

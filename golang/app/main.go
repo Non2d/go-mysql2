@@ -18,11 +18,11 @@ func main() {
 
 	/* ここから追加 */
 	// ルートを設定（第一引数にエンドポイント、第二引数にハンドラーを指定）
-	e.GET("/users", handler.GetAllUser)
-	e.POST("/users", handler.PostNewUser)
-	e.GET("/users/:id", handler.GetOneUser)
-	e.PUT("/users/:id", handler.PutUser)
-	e.DELETE("/users/:id", handler.DeleteUser)
+	e.GET("/api/users", handler.GetAllUser)
+	e.POST("/api/users", handler.PostNewUser)
+	e.GET("/api/users/:id", handler.GetOneUser)
+	e.PUT("/api/users/:id", handler.PutUser)
+	e.DELETE("/api/users/:id", handler.DeleteUser)
 	/* ここまで */
 
 	// サーバーをポート番号8080で起動
