@@ -22,7 +22,7 @@ services: #コンテナに対応
         env_file:
             - ./mysql/.env
         environment: #APIのURLをdevとprodで切り替え
-            - API_PREFIX=/users
+            - API_PREFIX=/
         depends_on: #コンテナの起動順序を指定．
             - db
         volumes: #コンテナの外部に保管し．データを永続化する．
