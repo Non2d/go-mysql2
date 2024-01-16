@@ -89,13 +89,6 @@ const ShoppingHome = () => {
   const handleEdit = async (name, age) => {
     try {
       const promises = selectedRows.map(async (id) => {
-        const product = products.find((product) => product.id === id);
-        const updatedProduct = {
-          ...product,
-          name: name,
-          age: age,
-          // updatedAt: new Date().toLocaleString(),
-        };
         await axios.put(`${API_URL}/users/${id}`, {
           name: name,
           age: age,

@@ -3,7 +3,7 @@ import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import UseFetchProducts from './UseFetchProducts';
 
-const ProductList = ({ API_URL }) => {
+const ProductList = ({ API_URL, selectedRows }) => {
   const products = UseFetchProducts(API_URL);
 
   const columns = [
