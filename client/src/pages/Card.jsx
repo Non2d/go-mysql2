@@ -1,5 +1,4 @@
 import React from 'react';
-import ToHomeButton from '../components/ToHomeButton';
 import EssayTextField from '../components/EssayTextField';
 
 const Card = () => {

@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home, Card, WeatherHome, Weather, ShoppingHome, NotFound } from './pages/index';
+import { Home, Card, WeatherHome, Weather, ShoppingHome, ShoppingHomeRefactored, NotFound } from './pages/index';
 import Header from "./components/Header";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -37,6 +37,7 @@ const App = () => {
                         <Route path="/weather/" element={<Weather />} />
                         <Route path="/weather/:id" element={<Weather />} />
                         <Route path="/shopping_home" element={<ShoppingHome />} />
+                        <Route path="/shopping_home_refactored" element={<ShoppingHomeRefactored />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </BrowserRouter>

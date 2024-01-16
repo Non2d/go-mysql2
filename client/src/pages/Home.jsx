@@ -1,7 +1,5 @@
 import React from 'react';
-import ToWeatherHomeButton from '../components/ToWeatherHomeButton';
-import ToCardButton from '../components/ToCardButton';
-import ToShoppingHomeButton from '../components/ToShoppingHomeButton';
+import ToPageButton from '../components/ToPageButton';
 
 const Home = () => {
   return (
@@ -9,10 +7,10 @@ const Home = () => {
       <h1>ホーム画面</h1>
       {/* <PlaceSearch /> */}
       {/* <EssayTextField /> */}
-      <ToWeatherHomeButton />
-      <ToCardButton />
-      <ToShoppingHomeButton />
-      
+      <ToPageButton link="/weather_home" label="天気予報へ" />
+      <ToPageButton link="/card" label="カードへ"/>
+      <ToPageButton link="/shopping_home" label="買い物リストへ"/>
+      <ToPageButton link="/shopping_home_refactored" label="改良版買い物リストへ"/>
     </div>
   );
 }
